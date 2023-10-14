@@ -18,6 +18,7 @@ class Frames():
             Возвращает путь до папки извлеченных изображений
         """
         # Откройте видеофайл
+        print(video_path)
         video_capture = cv2.VideoCapture(video_path)
 
         # Убедитесь, что начальное и конечное время находятся в пределах длительности видео
@@ -25,7 +26,6 @@ class Frames():
         frame_rate = int(video_capture.get(cv2.CAP_PROP_FPS))
         if start_time < 0:
             start_time = 0
-        print(video_length, frame_rate)
         if end_time >= video_length / frame_rate:
             end_time = video_length / frame_rate
 

@@ -1,6 +1,6 @@
 
 class Filter():
-    words_file = "words.txt"
+    words_file = "bad_words.txt"
     D =   {'а' : ['а', 'a', '@'],
     'б' : ['б', '6', 'b'],
     'в' : ['в', 'b', 'v'],
@@ -84,5 +84,5 @@ class Filter():
                 #Если отличие этого фрагмента меньше или равно 25% этого слова, то считаем, что они равны.
                 if Filter.distance(fragment, word) <= len(word)*0.25:
                     #Если они равны, выводим надпись о их нахождении.
-                    return True
-        return False
+                    return False
+        return True

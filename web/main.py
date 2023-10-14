@@ -11,9 +11,6 @@ import os
 from config import Config
 from filter import Filter
 from handle_video import Frames
-from MLmodels.LogoModel import LogoModel
-from MLmodels.BannerModel import BannerModel
-from MLmodels.PreviewModel import PreviewModel
 
 def create_app():
     app = Flask(__name__, template_folder=R"C:\Users\Dima\Desktop\Repositories\HackathonAI\web\static\templates")
@@ -30,10 +27,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 moder = Filter('words.txt')
 video_handler = Frames()
-
-logoML = LogoModel()
-previewML = PreviewModel()
-bannerML = BannerModel()
 
 class VideoUploadForm(FlaskForm):
     video = FileField('Выберите видео', validators=[DataRequired()])
@@ -54,23 +47,21 @@ def index():
 @app.route('/logo', methods=['GET', 'POST'])
 def img_logo():
     if request.method == "POST":
-        file = request.files['file']
-        if file and allowed_file(file.filename, type="image"):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect('/success')
-    return render_template(R"upload_img.html")
+        if moder.check(request.form['prompt']):
+            return f"Сгенерированный логотип по запросу: {request.form['prompt']}"
+        elif not moder.check(request.form['prompt']):
+            return f"Prompt is not available"
+    return render_template(R"get_logo.html")
 
 
 @app.route('/banner', methods=['GET', 'POST'])
 def img_banner():
     if request.method == "POST":
-        file = request.files['file']
-        if file and allowed_file(file.filename, type="image"):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect('/success')
-    return render_template(R"upload_img.html")
+        if moder.check(request.form['prompt']):
+            return f"Сгенерированный баннер по запросу: {request.form['prompt']}"
+        elif not moder.check(request.form['prompt']):
+            return f"Prompt is not available"
+    return render_template(R"get_banner.html")
 
 
 @app.route('/preview', methods=['GET', 'POST'])
@@ -86,11 +77,13 @@ def preview():
             end_time = end_min*60 + end_sec
 
             video_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(video_path)
             res_dir = video_handler.save_frames(video_path, 
                                       start_time=start_time, end_time=end_time)
-            # os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             image_names = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], res_dir))
             return render_template('frames.html', image_names=image_names, dirname=res_dir)
+        elif not moder.check(promt):
+            return f"Prompt is not available"
     return render_template("preview.html")
 
 
@@ -106,8 +99,7 @@ def process_image(dirname, image_name):
     for file in os.listdir(os.path.join(Config.UPLOAD_FILES_PATH, dirname)):
         if file != image_name:
             os.remove(os.path.join(os.path.join(Config.UPLOAD_FILES_PATH, dirname), file))
-    res_path = previewML.process(request.form["prompt"], Config.GENERATED_FILES_PATH, img_path, image_name)
-    return send_file(res_path)
+    return send_file(img_path)
 
 
 if __name__ == "__main__":
