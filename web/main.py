@@ -11,6 +11,9 @@ import os
 from config import Config
 from filter import Filter
 from handle_video import Frames
+from MLmodels.LogoModel import LogoModel
+from MLmodels.BannerModel import BannerModel
+from MLmodels.PreviewModel import PreviewModel
 
 def create_app():
     app = Flask(__name__, template_folder=R"C:\Users\Dima\Desktop\Repositories\HackathonAI\web\static\templates")
@@ -28,6 +31,9 @@ migrate = Migrate(app, db)
 moder = Filter('words.txt')
 video_handler = Frames()
 
+logoML = LogoModel()
+previewML = PreviewModel()
+bannerML = BannerModel()
 
 class VideoUploadForm(FlaskForm):
     video = FileField('Выберите видео', validators=[DataRequired()])
@@ -96,11 +102,12 @@ def get_image(dirname, image_name):
 
 @app.route('/process_image/<dirname>/<image_name>', methods=['GET', 'POST'])
 def process_image(dirname, image_name):
+    img_path = os.path.join(os.path.join(Config.UPLOAD_FILES_PATH, dirname), image_name)
     for file in os.listdir(os.path.join(Config.UPLOAD_FILES_PATH, dirname)):
         if file != image_name:
             os.remove(os.path.join(os.path.join(Config.UPLOAD_FILES_PATH, dirname), file))
-    result = "Обработка изображения: " + image_name
-    return result
+    res_path = previewML.process(request.form["prompt"], Config.GENERATED_FILES_PATH, img_path, image_name)
+    return send_file(res_path)
 
 
 if __name__ == "__main__":

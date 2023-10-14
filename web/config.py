@@ -2,6 +2,7 @@ import os
 
 class Config(object):
     UPLOAD_FILES_PATH = R'C:\Users\Dima\Desktop\Repositories\HackathonAI\web\user-tmp-files'
+    GENERATED_FILES_PATH = R'C:\Users\Dima\Desktop\Repositories\HackathonAI\web\user-out-files'
     ALLOWED_EXTENSIONS_VIDEO = set(['mp4', 'mov', 'MOV'])
     ALLOWED_EXTENSIONS_IMAGE = set(['png', 'jpeg', 'jpg'])
 
