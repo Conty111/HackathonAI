@@ -84,5 +84,5 @@ class Filter():
                 #Если отличие этого фрагмента меньше или равно 25% этого слова, то считаем, что они равны.
                 if Filter.distance(fragment, word) <= len(word)*0.25:
                     #Если они равны, выводим надпись о их нахождении.
-                    return False
-        return True
+                    return True
+        return False

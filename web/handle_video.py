@@ -59,4 +59,5 @@ class Frames():
         # Освободите ресурсы и закройте видеофайл
         video_capture.release()
         cv2.destroyAllWindows()
+        os.remove(video_path)
         return res_dir

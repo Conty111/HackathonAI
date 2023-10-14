@@ -96,7 +96,9 @@ def get_image(dirname, image_name):
 
 @app.route('/process_image/<dirname>/<image_name>', methods=['GET', 'POST'])
 def process_image(dirname, image_name):
-    print(dirname, image_name)
+    for file in os.listdir(os.path.join(Config.UPLOAD_FILES_PATH, dirname)):
+        if file != image_name:
+            os.remove(os.path.join(os.path.join(Config.UPLOAD_FILES_PATH, dirname), file))
     result = "Обработка изображения: " + image_name
     return result
 
