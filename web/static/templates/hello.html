@@ -1,0 +1,45 @@
+{% extends 'base_template.html' %}
+
+<head>
+    <link rel="stylesheet" href="web\static\styles\style.css">
+</head>
+
+{% block body%}
+    <section class="ai-cards">
+        <div class="cards">
+            <div class="card card1" style="width: 22rem; position: relative; top: -7vw;">
+                <img src="{{ url_for('static', filename = 'images/Ава.png') }}" class="card-img-top" alt="..." style="height: 14rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Генерация логотипа канала</h5>
+                    <p class="card-text">Поможем создать аватар на основе описания ваших предпочтений.</p>
+                    <a class="icon-link icon-link-hover" href="/upload_img" style="color: blueviolet; text-decoration: none;">
+                        Начать работу
+                        <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="card card1" style="width: 22rem; top: -2vw;">
+                <img src="{{ url_for('static', filename = 'images/prev.png') }}" class="card-img-top" alt="..." style="height: 12rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Генерация баннера канала</h5>
+                    <p class="card-text">Поможем создать баннер на основе описания ваших предпочтений.</p>
+                    <a class="icon-link icon-link-hover" href="/upload_img" style="color: blueviolet; text-decoration: none;">
+                        Начать работу
+                        <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="card card1" style="width: 22rem; top: 3vw;">
+                <img src="{{ url_for('static', filename = 'images/rutube.png') }}" class="card-img-top" alt="..." style="height: 12rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Генерация обложки для видео</h5>
+                    <p class="card-text">Поможем создать обложку для видео на основе его содержания и вашего описания.</p>
+                    <a class="icon-link icon-link-hover" href="/preview" style="color: blueviolet; text-decoration: none;">
+                        Начать работу
+                        <svg class="bi" aria-hidden="true"><use ></use></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

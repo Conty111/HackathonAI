@@ -1,0 +1,65 @@
+:root{
+    background-color: #100943;
+}
+
+html{
+    background-color: #100943;
+    scroll-behavior: smooth;
+    height: 100vw;
+}
+
+.ai-cards{
+    background-color: #ED143B;
+    height: 22vw;
+}
+
+.cards{
+    display:  flex;
+    flex-direction: row;
+    gap: 5vw;
+
+    margin-left: 10vw;
+    margin-top: 10vw;
+    height: 40vw;
+}
+
+.card1{
+    height: 80%;
+    text-align: center;
+}
+
+.card1 img{
+    margin: 10%;
+    width: 18rem;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.card-body a{
+    font-size: 1.5vw;
+    margin-left: 25%;
+}
+
+.card-text{
+    font-size: 1.25vw;
+}
+
+.card-title{
+    font-size: 2vw;
+    text-align: center;
+}
+
+.images_column{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    margin-left: 25%;
+}
+
+.images_column img{
+    width: 40vw;
+    height: 22.5vw;
+}

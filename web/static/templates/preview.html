@@ -1,0 +1,27 @@
+{% extends 'Страница-3.html' %}
+
+{% block body%}
+    <section style="color: white; background-color: #100943; padding: 5vw;">
+        <form action="" method="post" enctype=multipart/form-data style="display: flex; flex-direction: column; gap: 1vw;">
+            <h3>Выберите видеофайл</h3>
+            <p><input type="file" name="file"></p>
+            <h4>Добавьте текстовое описание</h4>
+            <p><input type="text" name="description" value="Promt" style="color: #100943;"></p>
+            <p></p>
+            <h4>Задайте продолжительность времени для выбора кадров</h4>
+            <h5>Начало диапазона</h5>
+            <label for="start_minutes">Минуты:</label>
+            <input type="number" id="start_minutes" name="start_minutes" min="0" step="1" required style="color: #100943;">
+            <label for="start_seconds">Секунды:</label>
+            <input type="number" id="start_seconds" name="start_seconds" min="0" max="59" step="1" required style="color: #100943;">
+        
+            <h5>Конец диапазона</h5>
+            <label for="end_minutes">Минуты:</label>
+            <input type="number" id="end_minutes" name="end_minutes" min="0" step="1" required style="color: #100943;">
+            <label for="end_seconds">Секунды:</label>
+            <input type="number" id="end_seconds" name="end_seconds" min="0" max="59" step="1" required style="color: #100943;">
+
+            <input type=submit value="Загрузить" class="btn btn-primary" style="margin-top: 3vw;">
+        </form>
+    </section>
+{% endblock %}

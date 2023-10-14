@@ -1,0 +1,35 @@
+{% extends 'base_template.html' %}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('img.clickable-image').click(function() {
+                var imageUrl = $(this).attr('src');
+                // Отправляем путь к изображению на сервер
+                $.ajax({
+                    type: 'POST',
+                    url: '/process_image',  // Замените на ваш маршрут обработки изображения на сервере
+                    data: {image_url: imageUrl},
+                    success: function(response) {
+                        // Здесь можно обработать ответ от сервера после обработки изображения
+                        alert('Сервер ответил: ' + response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+{% block body%}
+    <section style="color: white; background-color: #100943; padding: 10vw; padding-top: 15vw;">
+        <h1 style="text-align: center;">Выберите кадр</h1>
+        <div class="images_column">
+            {% for image_name in image_names %}
+                <a href="/process_image/{{ dirname }}/{{ image_name }}">
+                    <img class="clickable-image" src="{{ url_for('get_image', image_name=image_name, dirname=dirname) }}" alt="Изображение">
+                </a>
+            {% endfor %}
+        </div>   
+    </section>
+{% endblock %}
