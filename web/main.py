@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, send_file
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_wtf import FlaskForm
 from wtforms import FileField
@@ -23,7 +22,6 @@ def create_app():
 
 
 app = create_app()
-db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 moder = Filter('words.txt')
 video_handler = Frames()
