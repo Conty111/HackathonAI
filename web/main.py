@@ -22,7 +22,6 @@ def create_app():
 
 
 app = create_app()
-migrate = Migrate(app, db)
 moder = Filter('words.txt')
 video_handler = Frames()
 
