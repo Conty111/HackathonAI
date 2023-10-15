@@ -77,7 +77,7 @@ def preview():
             end_time = end_min*60 + end_sec
 
             video_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(video_path)
+            file.save(video_path)   
             res_dir = video_handler.save_frames(video_path, 
                                       start_time=start_time, end_time=end_time)
             image_names = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], res_dir))
